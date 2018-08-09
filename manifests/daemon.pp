@@ -92,6 +92,7 @@ define prometheus::daemon (
           ensure          => present,
           source          => $real_download_url,
           checksum_verify => false,
+          proxy_server    => $prometheus::server::http_proxy,
           before          => File["/opt/${name}-${version}.${os}-${arch}/${name}"],
         }
       } else {
@@ -103,6 +104,7 @@ define prometheus::daemon (
           checksum_verify => false,
           creates         => "/opt/${name}-${version}.${os}-${arch}/${name}",
           cleanup         => true,
+          proxy_server    => $prometheus::server::http_proxy,
           before          => File["/opt/${name}-${version}.${os}-${arch}/${name}"],
         }
       }

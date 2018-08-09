@@ -14,6 +14,7 @@ prometheus::manage_user: true
 prometheus::bin_dir: '/usr/local/bin'
 prometheus::version: '1.5.2'
 prometheus::install_method: 'url'
+prometheus::http_proxy: ~
 prometheus::manage_prometheus_server: false
 prometheus::alert_relabel_config: []
 prometheus::alertmanagers_config: []
