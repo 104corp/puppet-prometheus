@@ -1,0 +1,21 @@
+// 將您的設定放入此檔案中以覆寫預設值
+{
+  "sync-rsync.exclude": [
+    ".git",
+    ".vscode",
+    "vendor",
+    ".tmp",
+    "modules"
+  ],
+  "sync-rsync.delete": false,
+  "sync-rsync.sites": [
+    {
+      "localPath":"/Users/scottliao/Development/shazi7804.github/puppet-prometheus/",
+      "remotePath":"root@localhost:/etc/puppetlabs/code/modules/prometheus/",
+      "shell":"ssh -p 2022 -i ~/.ssh/scottliao"
+    }
+  ],
+  "sync-rsync.onSave": true,
+  "sync-rsync.executableShell": "/bin/bash",
+  "sync-rsync.autoHideOutput": true,
+}

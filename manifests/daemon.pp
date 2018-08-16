@@ -92,7 +92,7 @@ define prometheus::daemon (
           ensure          => present,
           source          => $real_download_url,
           checksum_verify => false,
-          proxy_server    => $prometheus::server::http_proxy,
+          proxy_server    => $prometheus::http_proxy,
           before          => File["/opt/${name}-${version}.${os}-${arch}/${name}"],
         }
       } else {
@@ -104,10 +104,11 @@ define prometheus::daemon (
           checksum_verify => false,
           creates         => "/opt/${name}-${version}.${os}-${arch}/${name}",
           cleanup         => true,
-          proxy_server    => $prometheus::server::http_proxy,
+          proxy_server    => $prometheus::http_proxy,
           before          => File["/opt/${name}-${version}.${os}-${arch}/${name}"],
         }
       }
+
       file { "/opt/${name}-${version}.${os}-${arch}/${name}":
           owner => 'root',
           group => 0, # 0 instead of root because OS X uses "wheel".
