@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## v7.0.1
+
+- fix alerts data type fail from [Error when installing Prometheus server #252](https://github.com/voxpupuli/puppet-prometheus/issues/252)
+
 ## v7.0.0
 
 - add http_proxy support to install server and exporter.

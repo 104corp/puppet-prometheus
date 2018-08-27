@@ -77,6 +77,7 @@ class prometheus::server (
     prometheus::alerts { 'alert':
       alerts   => $alerts,
       location => $config_dir,
+      version  => $version,
     }
     $_rule_files = concat(["${config_dir}/alert.rules"], $extra_rule_files, $rule_files)
   }

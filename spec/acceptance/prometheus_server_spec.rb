@@ -36,6 +36,52 @@ describe 'prometheus server basics' do
     it { is_expected.to be_listening.with('tcp6') }
   end
 
+  describe 'prometheus with complex alerts and scrape configs' do
+    it 'is idempotent' do
+      pp = <<-EOS
+    class { 'prometheus::server':
+      version => '2.3.2',
+      alerts => {
+        'groups' => [
+          {
+            'name' => 'alert.rules',
+            'rules' => [
+              {
+                'alert' => 'InstanceDown',
+                'expr'  => 'up == 0',
+                'for'   => '5m',
+                'labels' => {
+                  'severity' => 'page',
+                },
+                'annotations' => {
+                  'summary'     => 'Instance {{ $labels.instance }} down',
+                  'description' => '{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes.'
+                }
+              }
+            ]
+          }
+        ]
+      },
+      scrape_configs => [
+        {
+          'job_name' => 'prometheus',
+          'scrape_interval' => '10s',
+          'scrape_timeout'  => '10s',
+          'static_configs'  => [
+            {
+              'targets' => [ 'localhost:9090' ],
+              'labels'  => { 'alias' => 'Prometheus' }
+            }
+          ]
+        }
+      ]
+    }
+    EOS
+      # Run it twice and test for idempotency
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
+    end
+
   describe 'prometheus server with options' do
     it 'is idempotent' do
       pp = "class{'prometheus::server': version => '2.3.2', external_url => '/test'}"
