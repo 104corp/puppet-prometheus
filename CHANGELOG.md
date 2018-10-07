@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## v7.1.2
+
+- add facter `node_exporter_version`
+
 ## v7.1.1
 
 - add init_style support `redhat` type.

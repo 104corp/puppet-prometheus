@@ -1,11 +1,11 @@
-# puppet-prometheus
+# puppet module corp104_codedeploy_agent
 
-[![Build Status](https://travis-ci.org/voxpupuli/puppet-prometheus.svg?branch=master)](https://travis-ci.org/voxpupuli/puppet-prometheus)
+[![Build Status](https://travis-ci.org/104corp/puppet-prometheus.svg?branch=master)](https://travis-ci.org/104corp/puppet-prometheus)
 [![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/prometheus.svg)](https://forge.puppetlabs.com/puppet/prometheus)
 [![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/prometheus.svg)](https://forge.puppetlabs.com/puppet/prometheus)
 [![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/prometheus.svg)](https://forge.puppetlabs.com/puppet/prometheus)
 [![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/prometheus.svg)](https://forge.puppetlabs.com/puppet/prometheus)
-[![Apache-2 License](https://img.shields.io/github/license/voxpupuli/puppet-prometheus.svg)](LICENSE)
+[![Apache-2 License](https://img.shields.io/github/license/104corp/puppet-prometheus.svg)](LICENSE)
 
 ## Table of Contents
 
@@ -48,11 +48,11 @@ This module automates the install and configuration of Prometheus monitoring too
 **Notice about breaking changes**
 
 Version 5.0.0 and older of this module allowed you to deploy the prometheus server by doing a simple `include prometheus`.
-We introduced a [new class layout](https://github.com/voxpupuli/puppet-prometheus/pull/194) in
+We introduced a [new class layout](https://github.com/104corp/puppet-prometheus/pull/194) in
 version 6. By default, including the `prometheus` class won't deploy the server now.
 You need to include the `prometheus::server` class for this (which has the same
 parameters that `prometheus` had). An alternative approach is to set the
-`manage_prometheus_server` parameter to true in the `prometheus` class. Background information about this change is described in the related [pull request](https://github.com/voxpupuli/puppet-prometheus/pull/187) and the [issue](https://github.com/voxpupuli/puppet-prometheus/issues/184).
+`manage_prometheus_server` parameter to true in the `prometheus` class. Background information about this change is described in the related [pull request](https://github.com/104corp/puppet-prometheus/pull/187) and the [issue](https://github.com/104corp/puppet-prometheus/issues/184).
 
 To set up a prometheus daemon:
 On the server (for prometheus version < 1.0.0):
@@ -298,4 +298,6 @@ bundle exec rake test
 
 ## Authors
 
-puppet-prometheus is maintained by [Vox Pupuli](https://voxpupuli.org), it was written by [brutus333](https://github.com/brutus333/).
+puppet-prometheus is maintained by [104corp](https://www.104.com.tw).
+
+basic fork by Vox Pupuli, it was written by [brutus333](https://github.com/brutus333/).

@@ -1,12 +1,12 @@
 {
   "name": "puppet-prometheus",
-  "version": "7.1.1",
-  "author": "Vox Pupuli",
+  "version": "7.1.2",
+  "author": "104corp",
   "summary": "This module installs, configures and manages the Prometheus service.",
   "license": "Apache-2.0",
-  "source": "https://github.com/voxpupuli/puppet-prometheus.git",
-  "project_page": "https://github.com/voxpupuli/puppet-prometheus",
-  "issue_url": "https://github.com/voxpupuli/puppet-prometheus/issues",
+  "source": "https://github.com/104corp/puppet-prometheus.git",
+  "project_page": "https://github.com/104corp/puppet-prometheus",
+  "issue_url": "https://github.com/104corp/puppet-prometheus/issues",
   "dependencies": [
     {
       "name": "puppet/archive",
@@ -64,6 +64,7 @@
   "tags": [
     "prometheus",
     "monitoring",
-    "metrics"
+    "metrics",
+    "104"
   ]
 }
