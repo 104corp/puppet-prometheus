@@ -122,7 +122,7 @@ class prometheus::node_exporter (
   else {
     $release = $version
   }
-  
+
   if $custom_download_url_base {
     $real_download_url = $custom_download_url_base
   }
