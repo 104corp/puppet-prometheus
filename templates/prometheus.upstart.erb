@@ -22,7 +22,7 @@ script
     [ -e $DEFAULTS ] && . $DEFAULTS
 
     export GOMAXPROCS=${GOMAXPROCS:-2}
-    exec start-stop-daemon -c $USER -g $GROUP -p $PID_FILE -x $PROMETHEUS -S -- <%= @daemon_flags.join(" \\\n      ") %> \
+    exec start-stop-daemon --chuid $USER --group $GROUP --pidfile $PID_FILE --exec $PROMETHEUS --start -- <%= @daemon_flags.join(" \\\n      ") %> \
       <%= scope.lookupvar('prometheus::server::extra_options') %>
 end script
 

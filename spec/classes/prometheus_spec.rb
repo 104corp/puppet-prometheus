@@ -185,7 +185,6 @@ describe 'prometheus' do
               'ensure'     => 'running',
               'name'       => 'prometheus',
               'enable'     => true,
-              'hasrestart' => true
             )
           }
 

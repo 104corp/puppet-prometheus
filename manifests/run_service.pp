@@ -15,7 +15,6 @@ class prometheus::run_service {
       ensure     => $prometheus::server::service_ensure,
       name       => $init_selector,
       enable     => $prometheus::server::service_enable,
-      hasrestart => true,
     }
   }
 }
