@@ -116,6 +116,7 @@ prometheus::haproxy_exporter::user: 'haproxy-user'
 prometheus::haproxy_exporter::version: '0.7.1'
 prometheus::nginx_vts_exporter::nginx_scrape_uri: 'http://localhost/status/format/json'
 prometheus::nginx_vts_exporter::download_extension: 'tar.gz'
+prometheus::nginx_vts_exporter::custom_download_url_base: ~
 prometheus::nginx_vts_exporter::download_url_base: 'https://github.com/hnlq715/nginx-vts-exporter/releases'
 prometheus::nginx_vts_exporter::extra_groups: []
 prometheus::nginx_vts_exporter::group: 'nginx-vts-exporter'
