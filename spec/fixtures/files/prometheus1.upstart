@@ -22,7 +22,7 @@ script
     [ -e $DEFAULTS ] && . $DEFAULTS
 
     export GOMAXPROCS=${GOMAXPROCS:-2}
-    exec start-stop-daemon -c $USER -g $GROUP -p $PID_FILE -x $PROMETHEUS -S -- -config.file=/etc/prometheus/prometheus.yaml \
+    exec start-stop-daemon --chuid $USER $GROUP --pidfile $PID_FILE --exec $PROMETHEUS --start -- -config.file=/etc/prometheus/prometheus.yaml \
       -storage.local.path=/var/lib/prometheus \
       -storage.local.retention=360h \
       -web.console.templates=/usr/local/share/prometheus/consoles \
