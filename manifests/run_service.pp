@@ -12,9 +12,9 @@ class prometheus::run_service {
 
   if $prometheus::server::manage_service == true {
     service { 'prometheus':
-      ensure     => $prometheus::server::service_ensure,
-      name       => $init_selector,
-      enable     => $prometheus::server::service_enable,
+      ensure => $prometheus::server::service_ensure,
+      name   => $init_selector,
+      enable => $prometheus::server::service_enable,
     }
   }
 }
