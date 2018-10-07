@@ -1,10 +1,6 @@
-# puppet module corp104_codedeploy_agent
+# puppet module corp104_prometheus
 
 [![Build Status](https://travis-ci.org/104corp/puppet-prometheus.svg?branch=master)](https://travis-ci.org/104corp/puppet-prometheus)
-[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/prometheus.svg)](https://forge.puppetlabs.com/puppet/prometheus)
-[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/prometheus.svg)](https://forge.puppetlabs.com/puppet/prometheus)
-[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/prometheus.svg)](https://forge.puppetlabs.com/puppet/prometheus)
-[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/prometheus.svg)](https://forge.puppetlabs.com/puppet/prometheus)
 [![Apache-2 License](https://img.shields.io/github/license/104corp/puppet-prometheus.svg)](LICENSE)
 
 ## Table of Contents
