@@ -134,14 +134,3 @@ branches:
   only:
   - master
   - /^v\d/
-deploy:
-  provider: puppetforge
-  user: 104corp
-  password:
-    secure: "TrQ9AnqSuzEY8KS4MOELcTRt+b1rkEhBN05aqXtXY1MTeRNGbj47TqviQyiDE/BRQ/QYoSVbS0VDdQoqpb75vjEUldOzw7Ft4mjd3odxGwOgW4+kQQ9DovYDh8cJtaH1thxCZB32roJCimM0RGf0mMkE4pONEzvWlON/ikK213FsrwfVyLBW1qA4k8/lnMCTcgQpu9k6UQMqlBYHvfYDuzS5PZbT7syPniVh0zx/pZJKVzOCzlvliKr6dRaex03wrXGtdFLFiN/s6gW31hw6HjaFb7Si+FG38pdYrUkl7srOnITUqLX9RiigdmDwVPW7Ti7qIdYBNkdiWu54rxZ+vbVEOHxaYBKqJDhndTFKfYk6lB+x/Lmw7OK9QBGgPbvyIxGK9dM3mya4mkLaDVEIQy6H7unzQKKEyYL+I1735qudaACNFHXVRNQym8fvZJIviBedFLin8coRwBfW0ZZ9i3Cxzd7pRcoeh0LcRyTEeQVnQCTubx1L7lQPM6VYlR4Re2l4mkt5W5RqCT3g1/ZVqFQWn1RK/v0gLf0KiC+jw4TQ5shv/EoaADz5WRWUbBP5lrLmWj/JIAFEjj11br+s0CygcqC+ewMUWUQKefXIGI4qA8o3fU/EZkLZTFtyaQ64oq6ncy3UIa7IuCezLUTbHAZPZb8YgNjzVtLUj2AQU3k="
-  on:
-    tags: true
-    # all_branches is required to use tags
-    all_branches: true
-    # Only publish the build marked with "DEPLOY_TO_FORGE"
-    condition: "$DEPLOY_TO_FORGE = yes"
