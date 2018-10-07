@@ -83,6 +83,7 @@
 
 class prometheus::redis_exporter (
   Array[String] $addr,
+  Optional[String] $custom_download_url_base,
   String $download_extension,
   String $download_url_base,
   Array[String] $extra_groups,
@@ -111,7 +112,13 @@ class prometheus::redis_exporter (
 
   $release = "v${version}"
 
-  $real_download_url = pick($download_url, "${download_url_base}/download/${release}/${package_name}-${release}.${os}-${arch}.${download_extension}")
+  if $custom_download_url_base {
+    $real_download_url = $custom_download_url_base
+  }
+  else {
+    $real_download_url = pick($download_url, "${download_url_base}/download/${release}/${package_name}-${release}.${os}-${arch}.${download_extension}")
+  }
+
   $notify_service = $restart_on_change ? {
     true    => Service[$service_name],
     default => undef,

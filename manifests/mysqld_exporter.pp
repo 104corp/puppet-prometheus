@@ -96,6 +96,7 @@ class prometheus::mysqld_exporter (
   String $cnf_password,
   Stdlib::Port $cnf_port,
   String $cnf_user,
+  Optional[String] $custom_download_url_base,
   String $download_extension,
   Variant[Stdlib::HTTPSUrl, Stdlib::HTTPUrl] $download_url_base,
   Array $extra_groups,
@@ -123,7 +124,13 @@ class prometheus::mysqld_exporter (
 ) inherits prometheus {
 
   #Please provide the download_url for versions < 0.9.0
-  $real_download_url    = pick($download_url,"${download_url_base}/download/v${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+  if $custom_download_url_base {
+    $real_download_url = $custom_download_url_base
+  }
+  else {
+    $real_download_url    = pick($download_url,"${download_url_base}/download/v${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+  }
+
   $notify_service = $restart_on_change ? {
     true    => Service['mysqld_exporter'],
     default => undef,

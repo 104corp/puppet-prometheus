@@ -72,6 +72,7 @@
 #  [*version*]
 #  The binary release version
 class prometheus::varnish_exporter(
+  Optional[String] $custom_download_url_base,
   String $download_extension,
   Array $extra_groups,
   String $group,
@@ -96,7 +97,13 @@ class prometheus::varnish_exporter(
   Stdlib::Absolutepath $bin_dir  = $prometheus::bin_dir,
 ) inherits prometheus {
 
-  $real_download_url = pick($download_url,"${download_url_base}/download/${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+  if $custom_download_url_base {
+    $real_download_url = $custom_download_url_base
+  }
+  else {
+    $real_download_url = pick($download_url,"${download_url_base}/download/${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+  }
+
   $notify_service = $restart_on_change ? {
     true    => Service[$package_name],
     default => undef,

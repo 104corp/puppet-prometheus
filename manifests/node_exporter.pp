@@ -86,6 +86,7 @@
 #  The binary release version
 
 class prometheus::node_exporter (
+  Optional[String] $custom_download_url_base,
   String $download_extension,
   String $download_url_base,
   Array[String] $extra_groups,
@@ -121,7 +122,14 @@ class prometheus::node_exporter (
   else {
     $release = $version
   }
-  $real_download_url = pick($download_url,"${download_url_base}/download/${release}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+  
+  if $custom_download_url_base {
+    $real_download_url = $custom_download_url_base
+  }
+  else {
+    $real_download_url = pick($download_url,"${download_url_base}/download/${release}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+  }
+
   if $collectors {
     warning('Use of $collectors parameter is deprecated')
   }

@@ -98,6 +98,7 @@
 #
 
 class prometheus::rabbitmq_exporter (
+  Optional[String] $custom_download_url_base,
   String $download_url_base,
   Array[String] $extra_groups,
   String $group,
@@ -130,7 +131,13 @@ class prometheus::rabbitmq_exporter (
   Hash[String,String] $extra_env_vars = {},
 ) inherits prometheus {
 
-  $real_download_url    = pick($download_url, "${download_url_base}/download/v${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+  if $custom_download_url_base {
+    $real_download_url = $custom_download_url_base
+  }
+  else {
+    $real_download_url    = pick($download_url, "${download_url_base}/download/v${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+  }
+
   $notify_service = $restart_on_change ? {
     true    => Service['rabbitmq_exporter'],
     default => undef,

@@ -91,6 +91,7 @@
 #  Uri on howto connect to the database
 
 class prometheus::postgres_exporter (
+  Optional[String] $custom_download_url_base,
   String[1] $download_extension,
   String[1] $download_url_base,
   Array[String[1]] $extra_groups,
@@ -122,7 +123,12 @@ class prometheus::postgres_exporter (
 
   $release = "v${version}"
 
-  $real_download_url = pick($download_url, "${download_url_base}/download/${release}/${package_name}_${release}_${os}-${arch}.${download_extension}")
+  if $custom_download_url_base {
+    $real_download_url = $custom_download_url_base
+  }
+  else {
+    $real_download_url = pick($download_url, "${download_url_base}/download/${release}/${package_name}_${release}_${os}-${arch}.${download_extension}")
+  }
 
   $notify_service = $restart_on_change ? {
     true    => Service[$service_name],

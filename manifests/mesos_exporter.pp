@@ -78,6 +78,7 @@
 class prometheus::mesos_exporter (
   String $server_type,
   String $cnf_scrape_uri,
+  Optional[String] $custom_download_url_base,
   String $download_extension,
   String $download_url_base,
   Array $extra_groups,
@@ -102,7 +103,13 @@ class prometheus::mesos_exporter (
   String $bin_dir                = $prometheus::bin_dir,
 ) inherits prometheus {
 
-  $real_download_url    = pick($download_url,"${download_url_base}/download/v${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+  if $custom_download_url_base {
+    $real_download_url = $custom_download_url_base
+  }
+  else {
+    $real_download_url    = pick($download_url,"${download_url_base}/download/v${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+  }
+
   $notify_service = $restart_on_change ? {
     true    => Service['mesos_exporter'],
     default => undef,

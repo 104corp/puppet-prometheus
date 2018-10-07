@@ -70,6 +70,7 @@
 #  The binary release version
 
 class prometheus::process_exporter(
+  Optional[String] $custom_download_url_base,
   String $download_extension,
   Variant[Stdlib::HTTPSUrl, Stdlib::HTTPUrl] $download_url_base,
   Array $extra_groups,
@@ -104,7 +105,14 @@ class prometheus::process_exporter(
   else {
     $filename = "${package_name}-${version}.${os}-${arch}.${download_extension}"
   }
-  $real_download_url = pick($download_url,"${download_url_base}/download/v${version}/${filename}")
+
+  if $custom_download_url_base {
+    $real_download_url = $custom_download_url_base
+  }
+  else {
+    $real_download_url = pick($download_url,"${download_url_base}/download/v${version}/${filename}")
+  }
+
   $notify_service = $restart_on_change ? {
     true    => Service['process-exporter'],
     default => undef,

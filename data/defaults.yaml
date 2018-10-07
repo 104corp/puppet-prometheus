@@ -96,6 +96,7 @@ prometheus::localstorage: '/var/lib/prometheus'
 prometheus::mesos_exporter::server_type: 'master'
 prometheus::mesos_exporter::cnf_scrape_uri: 'http://localhost:5050'
 prometheus::mesos_exporter::download_extension: 'tar.gz'
+prometheus::mesos_exporter::custom_download_url_base: ~
 prometheus::mesos_exporter::download_url_base: 'https://github.com/mesosphere/mesos_exporter/releases'
 prometheus::mesos_exporter::extra_groups: []
 prometheus::mesos_exporter::group: 'mesos-exporter'
@@ -105,6 +106,7 @@ prometheus::mesos_exporter::package_name: 'mesos_exporter'
 prometheus::mesos_exporter::version: '1.0.0'
 prometheus::haproxy_exporter::cnf_scrape_uri: 'http://localhost:1234/haproxy?stats;csv'
 prometheus::haproxy_exporter::download_extension: 'tar.gz'
+prometheus::haproxy_exporter::custom_download_url_base: ~
 prometheus::haproxy_exporter::download_url_base: 'https://github.com/prometheus/haproxy_exporter/releases'
 prometheus::haproxy_exporter::extra_groups: []
 prometheus::haproxy_exporter::group: 'haproxy-exporter'
@@ -122,6 +124,7 @@ prometheus::nginx_vts_exporter::package_name: 'nginx-vts-exporter'
 prometheus::nginx_vts_exporter::user: 'nginx-vts-exporter'
 prometheus::nginx_vts_exporter::version: '0.6'
 prometheus::process_exporter::download_extension: 'tar.gz'
+prometheus::process_exporter::custom_download_url_base: ~
 prometheus::process_exporter::download_url_base: 'https://github.com/ncabatoff/process-exporter/releases'
 prometheus::process_exporter::extra_groups: []
 prometheus::process_exporter::group: 'process-exporter'
@@ -139,6 +142,7 @@ prometheus::pushgateway::package_name: 'pushgateway'
 prometheus::pushgateway::user: 'pushgateway'
 prometheus::pushgateway::version: '0.4.0'
 prometheus::rabbitmq_exporter::download_extension: 'tar.gz'
+prometheus::rabbitmq_exporter::custom_download_url_base: ~
 prometheus::rabbitmq_exporter::download_url_base: 'https://github.com/kbudde/rabbitmq_exporter/releases'
 prometheus::rabbitmq_exporter::extra_groups: []
 prometheus::rabbitmq_exporter::group: 'rabbitmq-exporter'
@@ -163,6 +167,7 @@ prometheus::mysqld_exporter::cnf_password: 'password'
 prometheus::mysqld_exporter::cnf_port: 3306
 prometheus::mysqld_exporter::cnf_user: 'login'
 prometheus::mysqld_exporter::download_extension: 'tar.gz'
+prometheus::mysqld_exporter::custom_download_url_base: ~
 prometheus::mysqld_exporter::download_url_base: 'https://github.com/prometheus/mysqld_exporter/releases'
 prometheus::mysqld_exporter::extra_groups: []
 prometheus::mysqld_exporter::group: 'mysqld-exporter'
@@ -172,6 +177,7 @@ prometheus::mysqld_exporter::user: 'mysqld-exporter'
 prometheus::mysqld_exporter::version: '0.9.0'
 prometheus::mongodb_exporter::cnf_uri: 'mongodb://localhost:27017'
 prometheus::mongodb_exporter::download_extension: 'tar.gz'
+prometheus::mongodb_exporter::custom_download_url_base: ~
 prometheus::mongodb_exporter::download_url_base: 'https://github.com/percona/mongodb_exporter/releases'
 prometheus::mongodb_exporter::extra_groups: []
 prometheus::mongodb_exporter::group: 'mongodb-exporter'
@@ -180,6 +186,7 @@ prometheus::mongodb_exporter::package_name: 'mongodb_exporter'
 prometheus::mongodb_exporter::user: 'mongodb-exporter'
 prometheus::mongodb_exporter::version: '0.3.1'
 prometheus::node_exporter::download_extension: 'tar.gz'
+prometheus::node_exporter::custom_download_url_base: ~
 prometheus::node_exporter::download_url_base: 'https://github.com/prometheus/node_exporter/releases'
 prometheus::node_exporter::extra_groups: []
 prometheus::node_exporter::group: 'node-exporter'
@@ -190,6 +197,7 @@ prometheus::node_exporter::version: '0.15.2'
 prometheus::beanstalkd_exporter::exporter_listen: ':9371'
 prometheus::beanstalkd_exporter::beanstalkd_address: '127.0.0.1:11300'
 prometheus::beanstalkd_exporter::download_extension: 'tar.gz'
+prometheus::beanstalkd_exporter::custom_download_url_base: ~
 prometheus::beanstalkd_exporter::download_url_base: 'https://github.com/messagebird/beanstalkd_exporter/releases'
 prometheus::beanstalkd_exporter::extra_groups: []
 prometheus::beanstalkd_exporter::group: 'beanstalkd-exporter'
@@ -217,6 +225,7 @@ prometheus::shared_dir: '/usr/local/share/prometheus'
 prometheus::snmp_exporter::config_file: '/etc/snmp-exporter.yaml'
 prometheus::snmp_exporter::config_template: ''
 prometheus::snmp_exporter::download_extension: 'tar.gz'
+prometheus::snmp_exporter::custom_download_url_base: ~
 prometheus::snmp_exporter::download_url_base: 'https://github.com/prometheus/snmp_exporter/releases'
 prometheus::snmp_exporter::extra_groups: []
 prometheus::snmp_exporter::group: 'snmp-exporter'
@@ -225,6 +234,7 @@ prometheus::snmp_exporter::package_name: 'snmp_exporter'
 prometheus::snmp_exporter::user: 'snmp-exporter'
 prometheus::snmp_exporter::version: '0.7.0'
 prometheus::statsd_exporter::download_extension: 'tar.gz'
+prometheus::statsd_exporter::custom_download_url_base: ~
 prometheus::statsd_exporter::download_url_base: 'https://github.com/prometheus/statsd_exporter/releases'
 prometheus::statsd_exporter::extra_groups: []
 prometheus::statsd_exporter::group: 'statsd-exporter'
@@ -245,6 +255,7 @@ prometheus::storage_retention: '360h' # 15d; "d" suffix is only supported with p
 prometheus::blackbox_exporter::user: 'blackbox-exporter'
 prometheus::blackbox_exporter::group: 'blackbox-exporter'
 prometheus::blackbox_exporter::download_extension: 'tar.gz'
+prometheus::blackbox_exporter::custom_download_url_base: ~
 prometheus::blackbox_exporter::download_url_base: 'https://github.com/prometheus/blackbox_exporter/releases'
 prometheus::blackbox_exporter::extra_groups: []
 prometheus::blackbox_exporter::package_ensure: 'latest'
@@ -254,6 +265,7 @@ prometheus::blackbox_exporter::config_file: '/etc/blackbox-exporter.yaml'
 prometheus::blackbox_exporter::version: '0.7.0'
 prometheus::postgres_exporter::data_source_uri: 'host=/var/run/postgresql/ sslmode=disable'
 prometheus::postgres_exporter::download_extension: 'tar.gz'
+prometheus::postgres_exporter::custom_download_url_base: ~
 prometheus::postgres_exporter::download_url_base: 'https://github.com/wrouesnel/postgres_exporter/releases'
 prometheus::postgres_exporter::extra_groups: []
 prometheus::postgres_exporter::group: 'postgres-exporter'
@@ -265,6 +277,7 @@ prometheus::postgres_exporter::version: '0.4.6'
 prometheus::redis_exporter::addr:
   - 'redis://localhost:6379'
 prometheus::redis_exporter::download_extension: 'tar.gz'
+prometheus::redis_exporter::custom_download_url_base: ~
 prometheus::redis_exporter::download_url_base: 'https://github.com/oliver006/redis_exporter/releases'
 prometheus::redis_exporter::extra_groups: []
 prometheus::redis_exporter::group: 'redis-exporter'
@@ -274,6 +287,7 @@ prometheus::redis_exporter::user: 'redis-exporter'
 prometheus::redis_exporter::version: '0.11.2'
 prometheus::user: 'prometheus'
 prometheus::varnish_exporter::download_extension: 'tar.gz'
+prometheus::varnish_exporter::custom_download_url_base: ~
 prometheus::varnish_exporter::download_url_base: 'https://github.com/jonnenauha/prometheus_varnish_exporter/releases'
 prometheus::varnish_exporter::extra_groups: []
 prometheus::varnish_exporter::group: 'varnish'
@@ -282,6 +296,7 @@ prometheus::varnish_exporter::package_name: 'prometheus_varnish_exporter'
 prometheus::varnish_exporter::user: 'varnish_exporter'
 prometheus::varnish_exporter::version: '1.4'
 prometheus::graphite_exporter::download_extension: 'tar.gz'
+prometheus::graphite_exporter::custom_download_url_base: ~
 prometheus::graphite_exporter::download_url_base: 'https://github.com/prometheus/graphite_exporter/releases'
 prometheus::graphite_exporter::group: 'graphite-exporter'
 prometheus::graphite_exporter::package_ensure: 'latest'
