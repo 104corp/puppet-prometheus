@@ -36,6 +36,24 @@ describe 'prometheus server basics' do
     it { is_expected.to be_listening.with('tcp6') }
   end
 
+  describe 'prometheus server with options' do
+    it 'is idempotent' do
+      pp = "class{'prometheus::server': version => '2.3.2', external_url => '/test'}"
+      # Run it twice and test for idempotency
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
+    end
+
+    describe service('prometheus') do
+      it { is_expected.to be_running }
+      it { is_expected.to be_enabled }
+    end
+
+    describe port(9090) do
+      it { is_expected.to be_listening.with('tcp6') }
+    end
+  end
+
   describe 'prometheus with complex alerts and scrape configs' do
     it 'is idempotent' do
       pp = <<-EOS
@@ -77,14 +95,6 @@ describe 'prometheus server basics' do
       ]
     }
     EOS
-      # Run it twice and test for idempotency
-      apply_manifest(pp, catch_failures: true)
-      apply_manifest(pp, catch_changes: true)
-    end
-
-  describe 'prometheus server with options' do
-    it 'is idempotent' do
-      pp = "class{'prometheus::server': version => '2.3.2', external_url => '/test'}"
       # Run it twice and test for idempotency
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
