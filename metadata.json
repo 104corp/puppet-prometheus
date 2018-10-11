@@ -1,6 +1,6 @@
 {
   "name": "puppet-prometheus",
-  "version": "7.1.4",
+  "version": "7.1.5",
   "author": "104corp",
   "summary": "This module installs, configures and manages the Prometheus service.",
   "license": "Apache-2.0",

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## v7.1.5
+
+- fix CentOS 6 with redhat service_provider
+
 ## v7.1.4
 
 - init_d support `RedHat 5`
