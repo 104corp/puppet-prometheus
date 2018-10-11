@@ -187,12 +187,25 @@ define prometheus::daemon (
         }
       }
       'redhat' : {
-        file { "/etc/init.d/${name}":
-          mode    => '0555',
-          owner   => 'root',
-          group   => 'root',
-          content => template('prometheus/daemon.sysv.erb'),
-          notify  => $notify_service,
+        if $facts['os']['family'] == 'RedHat' {
+          if $facts['os']['release']['major'] == '5' {
+            file { "/etc/init.d/${name}":
+              mode    => '0555',
+              owner   => 'root',
+              group   => 'root',
+              content => template('prometheus/daemon.sysv.bash3.erb'),
+              notify  => $notify_service,
+            }
+          }
+        }
+        else {
+          file { "/etc/init.d/${name}":
+            mode    => '0555',
+            owner   => 'root',
+            group   => 'root',
+            content => template('prometheus/daemon.sysv.erb'),
+            notify  => $notify_service,
+          }
         }
       }
       'debian' : {
