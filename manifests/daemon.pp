@@ -197,14 +197,14 @@ define prometheus::daemon (
               notify  => $notify_service,
             }
           }
-        }
-        else {
-          file { "/etc/init.d/${name}":
-            mode    => '0555',
-            owner   => 'root',
-            group   => 'root',
-            content => template('prometheus/daemon.sysv.erb'),
-            notify  => $notify_service,
+          else {
+            file { "/etc/init.d/${name}":
+              mode    => '0555',
+              owner   => 'root',
+              group   => 'root',
+              content => template('prometheus/daemon.sysv.erb'),
+              notify  => $notify_service,
+            }
           }
         }
       }
