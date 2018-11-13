@@ -1,6 +1,7 @@
 # class to manage the actual prometheus server
 # this is a private class that gets called from the init.pp
 class prometheus::server (
+  Optional[String] $custom_download_url_base                                    = $prometheus::custom_download_url_base,
   String $configname                                                            = $prometheus::configname,
   String $user                                                                  = $prometheus::user,
   String $group                                                                 = $prometheus::group,
@@ -45,13 +46,19 @@ class prometheus::server (
   Optional[Variant[Stdlib::HTTPurl, Stdlib::Unixpath, String[1]]] $external_url = $prometheus::external_url,
 ) inherits prometheus {
 
-  if( versioncmp($version, '1.0.0') == -1 ){
-    $real_download_url = pick($download_url,
-      "${download_url_base}/download/${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
-  } else {
-    $real_download_url = pick($download_url,
-      "${download_url_base}/download/v${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+  if $custom_download_url_base {
+    $real_download_url = $custom_download_url_base
   }
+  else {
+    if( versioncmp($version, '1.0.0') == -1 ){
+      $real_download_url = pick($download_url,
+        "${download_url_base}/download/${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+    } else {
+      $real_download_url = pick($download_url,
+        "${download_url_base}/download/v${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+    }
+  }
+
   $notify_service = $restart_on_change ? {
     true    => Service['prometheus'],
     default => undef,

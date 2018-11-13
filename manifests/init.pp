@@ -146,6 +146,7 @@ class prometheus (
   String $version,
   String $install_method,
   Optional[String] $http_proxy,
+  Optional[String] $custom_download_url_base,
   Variant[Stdlib::HTTPUrl, Stdlib::HTTPSUrl] $download_url_base,
   String $download_extension,
   String $package_name,
