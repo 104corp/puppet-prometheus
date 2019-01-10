@@ -129,6 +129,7 @@
 #  [*version*]
 #  The binary release version
 class prometheus::alertmanager (
+  Optional[String] $custom_download_url_base,
   Stdlib::Absolutepath $config_dir,
   Stdlib::Absolutepath $config_file,
   String $download_extension,
@@ -163,13 +164,19 @@ class prometheus::alertmanager (
   Stdlib::Absolutepath $bin_dir  = $prometheus::bin_dir,
 ) inherits prometheus {
 
-  if( versioncmp($version, '0.3.0') == -1 ){
-    $real_download_url    = pick($download_url,
-      "${download_url_base}/download/${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
-  } else {
-    $real_download_url    = pick($download_url,
-      "${download_url_base}/download/v${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+  if $custom_download_url_base {
+    $real_download_url = $custom_download_url_base
   }
+  else {
+    if( versioncmp($version, '0.3.0') == -1 ){
+      $real_download_url    = pick($download_url,
+        "${download_url_base}/download/${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+    } else {
+      $real_download_url    = pick($download_url,
+        "${download_url_base}/download/v${version}/${package_name}-${version}.${os}-${arch}.${download_extension}")
+    }
+  }
+
   $notify_service = $restart_on_change ? {
     true    => Service[$service_name],
     default => undef,
@@ -184,7 +191,7 @@ class prometheus::alertmanager (
   }
 
   file { $config_file:
-    ensure  => present,
+    ensure  => file,
     owner   => $user,
     group   => $group,
     mode    => $config_mode,
