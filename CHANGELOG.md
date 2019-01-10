@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## v7.3.0
+
+- Alert manager support custom url install.
+
 ## v7.2.0
 
 - Add custom_download_url_base for puppet server.
