@@ -82,30 +82,58 @@ define prometheus::daemon (
   case $install_method {
     'url': {
       if $download_extension == '' {
-        file { "/opt/${name}-${version}.${os}-${arch}":
-          ensure => directory,
-          owner  => 'root',
-          group  => 0, # 0 instead of root because OS X uses "wheel".
-          mode   => '0755',
-        }
-        -> archive { "/opt/${name}-${version}.${os}-${arch}/${name}":
-          ensure          => present,
-          source          => $real_download_url,
-          checksum_verify => false,
-          proxy_server    => $prometheus::http_proxy,
-          before          => File["/opt/${name}-${version}.${os}-${arch}/${name}"],
+        if $prometheus::http_proxy and ! empty($prometheus::http_proxy) {
+          file { "/opt/${name}-${version}.${os}-${arch}":
+            ensure => directory,
+            owner  => 'root',
+            group  => 0, # 0 instead of root because OS X uses "wheel".
+            mode   => '0755',
+          }
+          -> archive { "/opt/${name}-${version}.${os}-${arch}/${name}":
+            ensure          => present,
+            source          => $real_download_url,
+            checksum_verify => false,
+            proxy_server    => $prometheus::http_proxy,
+            before          => File["/opt/${name}-${version}.${os}-${arch}/${name}"],
+          }
+        } else {
+          file { "/opt/${name}-${version}.${os}-${arch}":
+            ensure => directory,
+            owner  => 'root',
+            group  => 0, # 0 instead of root because OS X uses "wheel".
+            mode   => '0755',
+          }
+          -> archive { "/opt/${name}-${version}.${os}-${arch}/${name}":
+            ensure          => present,
+            source          => $real_download_url,
+            checksum_verify => false,
+            before          => File["/opt/${name}-${version}.${os}-${arch}/${name}"],
+          }
         }
       } else {
-        archive { "/tmp/${name}-${version}.${download_extension}":
-          ensure          => present,
-          extract         => true,
-          extract_path    => '/opt',
-          source          => $real_download_url,
-          checksum_verify => false,
-          creates         => "/opt/${name}-${version}.${os}-${arch}/${name}",
-          cleanup         => true,
-          proxy_server    => $prometheus::http_proxy,
-          before          => File["/opt/${name}-${version}.${os}-${arch}/${name}"],
+        if $prometheus::http_proxy and ! empty($prometheus::http_proxy) {
+          archive { "/tmp/${name}-${version}.${download_extension}":
+            ensure          => present,
+            extract         => true,
+            extract_path    => '/opt',
+            source          => $real_download_url,
+            checksum_verify => false,
+            creates         => "/opt/${name}-${version}.${os}-${arch}/${name}",
+            cleanup         => true,
+            proxy_server    => $prometheus::http_proxy,
+            before          => File["/opt/${name}-${version}.${os}-${arch}/${name}"],
+          }
+        } else {
+          archive { "/tmp/${name}-${version}.${download_extension}":
+            ensure          => present,
+            extract         => true,
+            extract_path    => '/opt',
+            source          => $real_download_url,
+            checksum_verify => false,
+            creates         => "/opt/${name}-${version}.${os}-${arch}/${name}",
+            cleanup         => true,
+            before          => File["/opt/${name}-${version}.${os}-${arch}/${name}"],
+          }
         }
       }
 
@@ -271,3 +299,4 @@ define prometheus::daemon (
     }
   }
 }
+
