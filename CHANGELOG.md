@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## v7.5.0
+
+- Support node_exporter version 0.14.x on CentOS 5.x
+
 ## v7.4.0
 
 - Fix proxy_server when empty value

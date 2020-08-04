@@ -139,18 +139,25 @@ class prometheus::node_exporter (
     default => undef,
   }
 
-  $cmd_collectors_enable = $collectors_enable.map |$collector| {
-    "--collector.${collector}"
-  }
+  if ($::osfamily == 'Redhat' and versioncmp($::operatingsystemrelease, '6.0') < 0) {
+    $collectors_enable_options = join($collectors_enable, ',')
+    # No cmd_collectors_disable attribute with node_exporter version 0.14.0 on CentOS 5.x
+    #$cmd_collectors_disable = []
+    $cmd_collectors_enable = "-collectors.enabled ${collectors_enable_options}"
+    $options = join([$extra_options, $cmd_collectors_enable], ' ')
+  } else {
+    $cmd_collectors_enable = $collectors_enable.map |$collector| {
+      "--collector.${collector}"
+    }
 
-  $cmd_collectors_disable = $collectors_disable.map |$collector| {
-    "--no-collector.${collector}"
-  }
-
+    $cmd_collectors_disable = $collectors_disable.map |$collector| {
+      "--no-collector.${collector}"
+    }
 
     $options = join([$extra_options,
       join($cmd_collectors_enable, ' '),
       join($cmd_collectors_disable, ' ') ], ' ')
+  }
 
   prometheus::daemon { $service_name :
     install_method     => $install_method,
